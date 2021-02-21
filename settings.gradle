@@ -1,2 +1,3 @@
-include ':app'
+include ':rect-item-decoration'
+include ':demo'
 rootProject.name = "RectItemDecoration"
