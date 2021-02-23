@@ -1,0 +1,35 @@
+format:
+    image: runmymind/docker-android-sdk:alpine-standalone
+    variables:
+        GIT_STRATEGY: clone
+    script:
+    # ssh のインストール
+    - apk --update add openssh
+
+    # ssh のセットアップ
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -H "$CI_SERVER_HOST" >> ~/.ssh/known_hosts
+    - 'which ssh-agent || ( apk add --update openssh )'
+    - eval "$(ssh-agent -s)"
+    - echo "$SSH_PRIVATE_KEY" | ssh-add - > /dev/null
+
+    # Git のインストール
+    - apk --update add git
+
+    # Gitのセットアップ
+    - git config user.name $GITLAB_USER_NAME
+    - git config user.email $GITLAB_USER_EMAIL
+    - git remote set-url --push origin git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git
+    - git checkout $CI_COMMIT_REF_NAME
+
+    # コミットしたい処理
+    - ./gradlew clean ktlintFormat
+
+    # 差分があるときはコミット
+    - git add -u
+    - |-
+        if [ `git status -s | wc -l` -gt 0 ]; then
+            git commit -m "ci"
+            git push --push-option=ci.skip origin $CI_COMMIT_REF_NAME
+        fi
