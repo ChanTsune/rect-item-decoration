@@ -8,11 +8,19 @@ import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 
 class RectItemDecoration(
-    var topLine: LineConfig = LineConfig(),
-    var bottomLine: LineConfig = LineConfig(),
-    var rightLine: LineConfig = LineConfig(),
-    var leftLine: LineConfig = LineConfig(),
+    var topLine: LineConfig,
+    var bottomLine: LineConfig,
+    var rightLine: LineConfig,
+    var leftLine: LineConfig,
 ) : RecyclerView.ItemDecoration() {
+
+    constructor(line: LineConfig = LineConfig()) : this(
+        line,
+        line,
+        line,
+        line
+    )
+
     data class LineConfig(
         var isEnable: Boolean = true,
         var marginTop: Int = 0,
