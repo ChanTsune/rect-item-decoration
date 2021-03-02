@@ -7,7 +7,7 @@ import android.view.View
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 
-class RectItemDecoration(
+open class RectItemDecoration(
     var topLine: LineConfig,
     var bottomLine: LineConfig,
     var rightLine: LineConfig,
@@ -43,7 +43,7 @@ class RectItemDecoration(
         c.restore()
     }
 
-    private fun onItemDraw(
+    open fun onItemDraw(
         c: Canvas,
         rect: Rect,
         view: View,
