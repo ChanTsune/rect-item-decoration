@@ -36,6 +36,8 @@ class RectItemDecoration(
         for ((i, child) in parent.children.withIndex()) {
             val rect = Rect()
             parent.getDecoratedBoundsWithMargins(child, rect)
+            rect.right -= 1
+            rect.bottom -= 1
             onItemDraw(c, rect, child, parent, state, i)
         }
         c.restore()
