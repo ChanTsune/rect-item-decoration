@@ -6,18 +6,18 @@
 
 
 ```gradle
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
 ```
 
 ```gradle
-	dependencies {
-	        implementation 'com.github.ChanTsune:rect-item-decoration:${latest_version}'
-	}
+dependencies {
+        implementation 'com.github.ChanTsune:rect-item-decoration:${latest_version}'
+}
 ```
 
 
