@@ -81,7 +81,6 @@ open class RectItemDecoration(
                 bottomLine.paint
             )
         }
-
     }
 
     private fun drawRightLine(
@@ -102,7 +101,6 @@ open class RectItemDecoration(
                 rightLine.paint
             )
         }
-
     }
 
     private fun drawLeftLine(

@@ -1,8 +1,8 @@
 package com.github.chantsune.rectitemdecoration.demo
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.chantsune.rectitemdecoration.RectItemDecoration

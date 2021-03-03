@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.chantsune.rectitemdecoration.RectItemDecoration
 
-class MarginFragment: Fragment(R.layout.fragment_default) {
+class MarginFragment : Fragment(R.layout.fragment_default) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<RecyclerView>(R.id.recycler_view).also { recyclerView ->
