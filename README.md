@@ -16,7 +16,7 @@
 
 ```gradle
 	dependencies {
-	        implementation 'com.github.ChanTsune:rectitemdecoration:${latest_version}'
+	        implementation 'com.github.ChanTsune:rect-item-decoration:${latest_version}'
 	}
 ```
 
