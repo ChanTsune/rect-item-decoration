@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainFragment_to_customFragment"
             app:destination="@id/customFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_marginFragment"
+            app:destination="@id/marginFragment" />
     </fragment>
     <fragment
         android:id="@+id/defaultFragment"
@@ -26,4 +29,8 @@
         android:id="@+id/customFragment"
         android:name="com.github.chantsune.rectitemdecoration.demo.CustomFragment"
         android:label="CustomFragment" />
+    <fragment
+        android:id="@+id/marginFragment"
+        android:name="com.github.chantsune.rectitemdecoration.demo.MarginFragment"
+        android:label="MarginFragment" />
 </navigation>
