@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.chantsune.rectitemdecoration.RectItemDecoration
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         findViewById<RecyclerView>(R.id.recycler_view).also { recyclerView ->
             recyclerView.adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
