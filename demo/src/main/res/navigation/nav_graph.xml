@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_mainFragment_to_defaultFragment"
             app:destination="@id/defaultFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_customFragment"
+            app:destination="@id/customFragment" />
     </fragment>
     <fragment
         android:id="@+id/defaultFragment"
         android:name="com.github.chantsune.rectitemdecoration.demo.DefaultFragment"
         android:label="fragment_default"
         tools:layout="@layout/fragment_default" />
+    <fragment
+        android:id="@+id/customFragment"
+        android:name="com.github.chantsune.rectitemdecoration.demo.CustomFragment"
+        android:label="CustomFragment" />
 </navigation>
