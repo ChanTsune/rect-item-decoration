@@ -14,6 +14,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 findNavController().navigate(MainFragmentDirections.actionMainFragmentToDefaultFragment())
             }
         }
+        view.findViewById<AppCompatButton>(R.id.margin_button).also { button ->
+            button.setOnClickListener {
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToMarginFragment())
+            }
+        }
         view.findViewById<AppCompatButton>(R.id.custom_button).also { button ->
             button.setOnClickListener {
                 findNavController().navigate(MainFragmentDirections.actionMainFragmentToCustomFragment())
