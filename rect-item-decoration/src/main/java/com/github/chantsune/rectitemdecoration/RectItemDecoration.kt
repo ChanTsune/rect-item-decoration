@@ -43,13 +43,14 @@ open class RectItemDecoration(
         c.restore()
     }
 
-    open fun onItemDraw(
+    private fun drawTopLine(
         c: Canvas,
         rect: Rect,
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        position: Int
+        position: Int,
+        topLine: LineConfig
     ) {
         if (topLine.isEnable) {
             c.drawLine(
@@ -60,6 +61,17 @@ open class RectItemDecoration(
                 topLine.paint
             )
         }
+    }
+
+    private fun drawBottomLine(
+        c: Canvas,
+        rect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State,
+        position: Int,
+        bottomLine: LineConfig
+    ) {
         if (bottomLine.isEnable) {
             c.drawLine(
                 rect.left.toFloat() + bottomLine.marginLeft,
@@ -69,6 +81,18 @@ open class RectItemDecoration(
                 bottomLine.paint
             )
         }
+
+    }
+
+    private fun drawRightLine(
+        c: Canvas,
+        rect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State,
+        position: Int,
+        rightLine: LineConfig
+    ) {
         if (rightLine.isEnable) {
             c.drawLine(
                 rect.right.toFloat() - rightLine.marginRight,
@@ -78,6 +102,18 @@ open class RectItemDecoration(
                 rightLine.paint
             )
         }
+
+    }
+
+    private fun drawLeftLine(
+        c: Canvas,
+        rect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State,
+        position: Int,
+        leftLine: LineConfig
+    ) {
         if (leftLine.isEnable) {
             c.drawLine(
                 rect.left.toFloat() + leftLine.marginLeft,
@@ -87,5 +123,19 @@ open class RectItemDecoration(
                 leftLine.paint
             )
         }
+    }
+
+    private fun onItemDraw(
+        c: Canvas,
+        rect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State,
+        position: Int
+    ) {
+        drawTopLine(c, rect, view, parent, state, position, topLine.copy())
+        drawBottomLine(c, rect, view, parent, state, position, bottomLine.copy())
+        drawRightLine(c, rect, view, parent, state, position, rightLine.copy())
+        drawLeftLine(c, rect, view, parent, state, position, leftLine.copy())
     }
 }
