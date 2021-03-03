@@ -1,6 +1,6 @@
 # RectItemDecoration
 
-![CI](https://github.com/ChanTsune/RectItemDecoratio/workflows/CI/badge.svg)
+[![CI](https://github.com/ChanTsune/RectItemDecoration/actions/workflows/ci.yml/badge.svg)](https://github.com/ChanTsune/RectItemDecoration/actions/workflows/ci.yml)
 [![](https://jitpack.io/v/ChanTsune/rectitemdecoration.svg)](https://jitpack.io/#ChanTsune/rectitemdecoration)
 ![GitHub](https://img.shields.io/github/license/ChanTsune/RectItemDecoration)
 
