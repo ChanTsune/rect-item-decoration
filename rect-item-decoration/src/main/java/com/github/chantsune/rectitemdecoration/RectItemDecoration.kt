@@ -8,11 +8,15 @@ import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 
 open class RectItemDecoration(
-    var topLine: LineConfig,
-    var bottomLine: LineConfig,
-    var rightLine: LineConfig,
-    var leftLine: LineConfig,
+    topLine: LineConfig,
+    bottomLine: LineConfig,
+    rightLine: LineConfig,
+    leftLine: LineConfig,
 ) : RecyclerView.ItemDecoration() {
+    var topLineConfigLookUp: LineConfigLookUp = DefaultLineConfigLookUp(topLine)
+    var bottomLineConfigLookUp: LineConfigLookUp = DefaultLineConfigLookUp(bottomLine)
+    var rightLineConfigLookUp: LineConfigLookUp = DefaultLineConfigLookUp(rightLine)
+    var leftLineConfigLookUp: LineConfigLookUp = DefaultLineConfigLookUp(leftLine)
 
     constructor(line: LineConfig = LineConfig()) : this(
         line,
@@ -29,6 +33,24 @@ open class RectItemDecoration(
         var marginLeft: Int = 0,
         var paint: Paint = Paint(),
     )
+
+    abstract class LineConfigLookUp {
+        abstract fun getIsEnable(position: Int): Boolean
+        abstract fun getMarginTop(position: Int): Int
+        abstract fun getMarginBottom(position: Int): Int
+        abstract fun getMarginRight(position: Int): Int
+        abstract fun getMarginLeft(position: Int): Int
+        abstract fun getPaint(position: Int): Paint
+    }
+
+    private class DefaultLineConfigLookUp(val line: LineConfig) : LineConfigLookUp() {
+        override fun getIsEnable(position: Int): Boolean = line.isEnable
+        override fun getMarginTop(position: Int): Int = line.marginTop
+        override fun getMarginBottom(position: Int): Int = line.marginBottom
+        override fun getMarginRight(position: Int): Int = line.marginRight
+        override fun getMarginLeft(position: Int): Int = line.marginLeft
+        override fun getPaint(position: Int): Paint = line.paint
+    }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
@@ -50,15 +72,14 @@ open class RectItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State,
         position: Int,
-        topLine: LineConfig
     ) {
-        if (topLine.isEnable) {
+        if (topLineConfigLookUp.getIsEnable(position)) {
             c.drawLine(
-                rect.left.toFloat() + topLine.marginLeft,
-                rect.top.toFloat() + topLine.marginTop,
-                rect.right.toFloat() - topLine.marginRight,
-                rect.top.toFloat() + topLine.marginTop,
-                topLine.paint
+                rect.left.toFloat() + topLineConfigLookUp.getMarginLeft(position),
+                rect.top.toFloat() + topLineConfigLookUp.getMarginTop(position),
+                rect.right.toFloat() - topLineConfigLookUp.getMarginRight(position),
+                rect.top.toFloat() + topLineConfigLookUp.getMarginTop(position),
+                topLineConfigLookUp.getPaint(position)
             )
         }
     }
@@ -70,15 +91,14 @@ open class RectItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State,
         position: Int,
-        bottomLine: LineConfig
     ) {
-        if (bottomLine.isEnable) {
+        if (bottomLineConfigLookUp.getIsEnable(position)) {
             c.drawLine(
-                rect.left.toFloat() + bottomLine.marginLeft,
-                rect.bottom.toFloat() - bottomLine.marginBottom,
-                rect.right.toFloat() - bottomLine.marginRight,
-                rect.bottom.toFloat() - bottomLine.marginBottom,
-                bottomLine.paint
+                rect.left.toFloat() + bottomLineConfigLookUp.getMarginLeft(position),
+                rect.bottom.toFloat() - bottomLineConfigLookUp.getMarginBottom(position),
+                rect.right.toFloat() - bottomLineConfigLookUp.getMarginRight(position),
+                rect.bottom.toFloat() - bottomLineConfigLookUp.getMarginBottom(position),
+                bottomLineConfigLookUp.getPaint(position)
             )
         }
     }
@@ -90,15 +110,14 @@ open class RectItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State,
         position: Int,
-        rightLine: LineConfig
     ) {
-        if (rightLine.isEnable) {
+        if (rightLineConfigLookUp.getIsEnable(position)) {
             c.drawLine(
-                rect.right.toFloat() - rightLine.marginRight,
-                rect.top.toFloat() + rightLine.marginTop,
-                rect.right.toFloat() - rightLine.marginRight,
-                rect.bottom.toFloat() - rightLine.marginBottom,
-                rightLine.paint
+                rect.right.toFloat() - rightLineConfigLookUp.getMarginRight(position),
+                rect.top.toFloat() + rightLineConfigLookUp.getMarginTop(position),
+                rect.right.toFloat() - rightLineConfigLookUp.getMarginRight(position),
+                rect.bottom.toFloat() - rightLineConfigLookUp.getMarginBottom(position),
+                rightLineConfigLookUp.getPaint(position)
             )
         }
     }
@@ -110,15 +129,14 @@ open class RectItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State,
         position: Int,
-        leftLine: LineConfig
     ) {
-        if (leftLine.isEnable) {
+        if (leftLineConfigLookUp.getIsEnable(position)) {
             c.drawLine(
-                rect.left.toFloat() + leftLine.marginLeft,
-                rect.top.toFloat() + leftLine.marginTop,
-                rect.left.toFloat() + leftLine.marginLeft,
-                rect.bottom.toFloat() - leftLine.marginBottom,
-                leftLine.paint
+                rect.left.toFloat() + leftLineConfigLookUp.getMarginLeft(position),
+                rect.top.toFloat() + leftLineConfigLookUp.getMarginTop(position),
+                rect.left.toFloat() + leftLineConfigLookUp.getMarginLeft(position),
+                rect.bottom.toFloat() - leftLineConfigLookUp.getMarginBottom(position),
+                leftLineConfigLookUp.getPaint(position)
             )
         }
     }
@@ -131,9 +149,9 @@ open class RectItemDecoration(
         state: RecyclerView.State,
         position: Int
     ) {
-        drawTopLine(c, rect, view, parent, state, position, topLine.copy())
-        drawBottomLine(c, rect, view, parent, state, position, bottomLine.copy())
-        drawRightLine(c, rect, view, parent, state, position, rightLine.copy())
-        drawLeftLine(c, rect, view, parent, state, position, leftLine.copy())
+        drawTopLine(c, rect, view, parent, state, position)
+        drawBottomLine(c, rect, view, parent, state, position)
+        drawRightLine(c, rect, view, parent, state, position)
+        drawLeftLine(c, rect, view, parent, state, position)
     }
 }
