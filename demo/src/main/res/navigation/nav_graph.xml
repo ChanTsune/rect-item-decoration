@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_mainFragment_to_marginFragment"
             app:destination="@id/marginFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_lineConfigLookUpFragment"
+            app:destination="@id/lineConfigLookUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/defaultFragment"
@@ -33,4 +36,8 @@
         android:id="@+id/marginFragment"
         android:name="com.github.chantsune.rectitemdecoration.demo.MarginFragment"
         android:label="MarginFragment" />
+    <fragment
+        android:id="@+id/lineConfigLookUpFragment"
+        android:name="com.github.chantsune.rectitemdecoration.demo.LineConfigLookUpFragment"
+        android:label="LineConfigLookUpFragment" />
 </navigation>

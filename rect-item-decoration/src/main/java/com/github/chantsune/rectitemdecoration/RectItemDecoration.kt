@@ -8,21 +8,35 @@ import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 
 open class RectItemDecoration(
-    topLine: LineConfig,
-    bottomLine: LineConfig,
-    rightLine: LineConfig,
-    leftLine: LineConfig,
+    var topLineConfigLookUp: LineConfigLookUp,
+    var bottomLineConfigLookUp: LineConfigLookUp,
+    var rightLineConfigLookUp: LineConfigLookUp,
+    var leftLineConfigLookUp: LineConfigLookUp,
 ) : RecyclerView.ItemDecoration() {
-    var topLineConfigLookUp: LineConfigLookUp = DefaultLineConfigLookUp(topLine)
-    var bottomLineConfigLookUp: LineConfigLookUp = DefaultLineConfigLookUp(bottomLine)
-    var rightLineConfigLookUp: LineConfigLookUp = DefaultLineConfigLookUp(rightLine)
-    var leftLineConfigLookUp: LineConfigLookUp = DefaultLineConfigLookUp(leftLine)
+    constructor(
+        topLine: LineConfig,
+        bottomLine: LineConfig,
+        rightLine: LineConfig,
+        leftLine: LineConfig,
+    ) : this(
+        DefaultLineConfigLookUp(topLine),
+        DefaultLineConfigLookUp(bottomLine),
+        DefaultLineConfigLookUp(rightLine),
+        DefaultLineConfigLookUp(leftLine),
+    )
 
     constructor(line: LineConfig = LineConfig()) : this(
         line,
         line,
         line,
-        line
+        line,
+    )
+
+    constructor(lineConfigLookUp: LineConfigLookUp) : this(
+        lineConfigLookUp,
+        lineConfigLookUp,
+        lineConfigLookUp,
+        lineConfigLookUp,
     )
 
     data class LineConfig(
@@ -41,6 +55,15 @@ open class RectItemDecoration(
         abstract fun getMarginRight(position: Int): Int
         abstract fun getMarginLeft(position: Int): Int
         abstract fun getPaint(position: Int): Paint
+    }
+
+    abstract class SimpleLineConfigLookUp : LineConfigLookUp() {
+        override fun getIsEnable(position: Int): Boolean = true
+        override fun getMarginTop(position: Int): Int = 0
+        override fun getMarginBottom(position: Int): Int = 0
+        override fun getMarginRight(position: Int): Int = 0
+        override fun getMarginLeft(position: Int): Int = 0
+        override fun getPaint(position: Int): Paint = Paint()
     }
 
     private class DefaultLineConfigLookUp(val line: LineConfig) : LineConfigLookUp() {
