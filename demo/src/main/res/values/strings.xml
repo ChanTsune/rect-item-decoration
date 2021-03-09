@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RectItemDecoration</string>
+    <string name="app_name">RectItemDecoration Demo App</string>
     <string name="default_rect_decoration">default rect decoration</string>
     <string name="custom_rect_decoration">custom rect decoration</string>
     <string name="rect_decoration_with_margin">rect decoration with margin</string>
