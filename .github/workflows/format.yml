@@ -1,0 +1,32 @@
+name: "Format"
+
+on:
+  push:
+
+jobs: 
+  format:
+    runs-on: ubuntu-latest
+    steps: 
+    - name: Checkout repo
+      uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.konan
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+    - name: run format
+      run: ./gradlew clean ktlintFormat
+
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v7
+      with:
+        author_name: GitHub Actions
+        author_email: 41658782+ChanTsune@users.noreply.github.com
+        message: "format commit"
+        add: "*/*.kt *.kts"
+      env:
+        GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
