@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import android.view.View
+import androidx.core.graphics.withSave
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 
@@ -12,6 +13,7 @@ open class RectItemDecoration(
     var bottomLineConfigLookUp: LineConfigLookUp,
     var rightLineConfigLookUp: LineConfigLookUp,
     var leftLineConfigLookUp: LineConfigLookUp,
+    private val drawOver: Boolean = false,
 ) : RecyclerView.ItemDecoration() {
     constructor(
         topLine: LineConfig,
@@ -77,15 +79,32 @@ open class RectItemDecoration(
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
-        c.save()
-        for ((i, child) in parent.children.withIndex()) {
-            val rect = Rect()
-            parent.getDecoratedBoundsWithMargins(child, rect)
-            rect.right -= 1
-            rect.bottom -= 1
-            onItemDraw(c, rect, child, parent, state, i)
+        if (!drawOver) {
+            c.withSave {
+                for ((i, child) in parent.children.withIndex()) {
+                    val rect = Rect()
+                    parent.getDecoratedBoundsWithMargins(child, rect)
+                    rect.right -= 1
+                    rect.bottom -= 1
+                    onItemDraw(c, rect, child, parent, state, i)
+                }
+            }
         }
-        c.restore()
+    }
+
+    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        super.onDrawOver(c, parent, state)
+        if(drawOver) {
+            c.withSave {
+                for ((i, child) in parent.children.withIndex()) {
+                    val rect = Rect()
+                    parent.getDecoratedBoundsWithMargins(child, rect)
+                    rect.right -= 1
+                    rect.bottom -= 1
+                    onItemDraw(c, rect, child, parent, state, i)
+                }
+            }
+        }
     }
 
     private fun drawTopLine(
