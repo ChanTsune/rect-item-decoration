@@ -94,7 +94,7 @@ open class RectItemDecoration(
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
-        if(drawOver) {
+        if (drawOver) {
             c.withSave {
                 for ((i, child) in parent.children.withIndex()) {
                     val rect = Rect()
