@@ -9,7 +9,7 @@ jobs:
     steps: 
     - name: Checkout repo
       uses: actions/checkout@v3
-    - uses: actions/cache@v3.2.5
+    - uses: actions/cache@v3.2.6
       with:
         path: |
           ~/.gradle/caches
