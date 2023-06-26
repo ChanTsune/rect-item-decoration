@@ -6,6 +6,8 @@ plugins {
 }
 
 android {
+    namespace "com.github.chantsune.rectitemdecoration.demo"
+
     compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
