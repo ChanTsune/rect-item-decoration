@@ -8,13 +8,11 @@ plugins {
 android {
     namespace "com.github.chantsune.rectitemdecoration.demo"
 
-    compileSdkVersion 33
-    buildToolsVersion "30.0.3"
-
     defaultConfig {
         applicationId "com.github.chantsune.rectitemdecoration.demo"
         minSdkVersion 23
-        targetSdkVersion 33
+        targetSdkVersion 34
+        compileSdk 34
         versionCode 1
         versionName "1.0"
 
